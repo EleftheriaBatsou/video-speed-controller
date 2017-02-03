@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Video Speed Scrubber</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="wrapper">
+    <video class="flex" width="765" height="430" src="https://www.youtube.com/watch?v=vQ2A1pOchFM&t=2s" loop controls></video>
+    <div class="speed">
+      <div class="speed-bar">1×</div>
+    </div>
+  </div>
+  
+  <div> <!-- for footer -->
+      <h5><a href="http://www.eleftheriabatsou.com" target="_blank">Eleftheria Batsou</a> | <a href="http://codepen.io/EleftheriaBatsou" target="_blank">Projects</a></h5>
+    </div> <!-- end footer -->
+
+<script>
+	const speed = document.querySelector('.speed');
+	const bar = speed.querySelector('.speed-bar');
+	const video = document.querySelector('.flex');
+	
+	function handleMove(e){
+		const y = e.pageY - this.offsetTop;
+		const percent = y / this.offsetHeight;
+		const min = 0.4;
+		const max = 4;
+		const height = Math.round(percent * 100) + '%';
+		const playbackRate = percent * (max - min) + min;
+		bar.style.heigh = height;
+		bar.textContent = playbackRate.toFixed(2) + 'x';
+		video.playbackRate = playbackRate;
+	}
+	
+	speed.addEventListener('mousemove', handleMove);
+
+
+</script>
+</body>
+</html>
+
+<!-- mouse move events and html5 videos-->
